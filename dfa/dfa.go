@@ -10,11 +10,11 @@ import (
 // DFA to struktura reprezentująca deterministyczny automat skończony
 type DFA struct {
 	fsa.FiniteAutomaton                              // {Q, Σ, F}
-	Transitions         map[fsa.Transition]fsa.State // Tabela przejść - δ
+	Transitions         map[fsa.Transition]fsa.State // Funkcja przejść - δ: Q × Σ -> Q
 	InitialState        fsa.State                    // Stan początkowy - q0
 }
 
-// Metoda Accepts sprawdza czy automat akceptuje dane wyrażenie
+// Accepts sprawdza czy automat akceptuje dane wyrażenie
 func (dfa DFA) Accepts(word string) (bool, error) {
 	// zaczynamy od stanu początkowego
 	q := dfa.InitialState

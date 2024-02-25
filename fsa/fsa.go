@@ -22,7 +22,7 @@ type FiniteAutomaton struct {
 }
 
 type IFiniteStateMachine interface {
-	// Metoda Accepts ma sprawdzać czy automat akceptuje dane wyrażenie
+	// Accepts ma sprawdzać czy automat akceptuje dane wyrażenie
 	// i zwracać błąd jeśli wystąpi problem z wyrażeniem bądź automatem
 	Accepts(word string) (bool, error)
 }
