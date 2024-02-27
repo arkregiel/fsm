@@ -30,10 +30,11 @@ func (set StateSet) ContainsFinalState() bool {
 }
 
 // Extend rozszerza istniejący zbiór stanów
-func (set *StateSet) Extend(stateSet StateSet) {
+func (set *StateSet) Extend(stateSet StateSet) *StateSet {
 	for _, q := range stateSet.States {
 		set.AddState(q)
 	}
+	return set
 }
 
 // NewEmptyStateSet zwraca pusty zbiór stanów
