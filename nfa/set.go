@@ -1,27 +1,23 @@
 package nfa
 
 import (
-	"slices"
-
 	"github.com/arkregiel/fsm/fsa"
 )
 
 // StateSet reprezentuje zbiór stanów
 type StateSet struct {
-	States []fsa.State
+	States map[fsa.State]bool
 }
 
 // AddState dodaje stan do zbioru
 func (set *StateSet) AddState(q fsa.State) *StateSet {
-	if !slices.Contains(set.States, q) {
-		set.States = append(set.States, q)
-	}
+  set.States[q] = true
 	return set
 }
 
 // ContainsFinalState sprawdza, czy w zbiorze występuje stan końcowy
 func (set StateSet) ContainsFinalState() bool {
-	for _, q := range set.States {
+	for q := range set.States {
 		if q.IsFinal {
 			return true
 		}
@@ -31,7 +27,7 @@ func (set StateSet) ContainsFinalState() bool {
 
 // Extend rozszerza istniejący zbiór stanów
 func (set *StateSet) Extend(stateSet StateSet) *StateSet {
-	for _, q := range stateSet.States {
+	for q := range stateSet.States {
 		set.AddState(q)
 	}
 	return set
@@ -40,7 +36,7 @@ func (set *StateSet) Extend(stateSet StateSet) *StateSet {
 // NewEmptyStateSet zwraca pusty zbiór stanów
 func NewEmptyStateSet() *StateSet {
 	return &StateSet{
-		States: make([]fsa.State, 0),
+		States: make(map[fsa.State]bool),
 	}
 }
 

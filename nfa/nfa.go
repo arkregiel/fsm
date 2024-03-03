@@ -31,7 +31,7 @@ func (nfa NFA) Accepts(word string) (bool, error) {
 // przejdzie automat pod wpływem podanego symbolu
 func (nfa NFA) makeTransitions(currentStates *StateSet, symbol rune) *StateSet {
 	newStatesSet := NewEmptyStateSet()
-	for _, q := range currentStates.States {
+	for q := range currentStates.States {
 		if nextStates, ok := nfa.Transitions[fsa.Transition{State: q, Symbol: symbol}]; ok {
 			newStatesSet.Extend(*nextStates)
 		}
